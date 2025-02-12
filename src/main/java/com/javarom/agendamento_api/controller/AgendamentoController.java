@@ -1,14 +1,11 @@
-package com.javarom.agendamento_api.controller.dto;
+package com.javarom.agendamento_api.controller;
 
 import com.javarom.agendamento_api.business.AgendamentoService;
 import com.javarom.agendamento_api.controller.dto.in.AgendamentoRecord;
 import com.javarom.agendamento_api.controller.dto.out.AgendamentoRecordOut;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,4 +19,10 @@ public class AgendamentoController {
 
         return  ResponseEntity.ok(agendamentoService.gravarAgendamento(agendamento));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AgendamentoRecordOut> buscarAgendamentoPorId(@PathVariable("id") Long id){
+        return ResponseEntity.ok(agendamentoService.buscarAgendamentosPorId(id));
+    }
+
 }

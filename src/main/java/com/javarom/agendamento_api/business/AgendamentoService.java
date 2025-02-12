@@ -3,6 +3,7 @@ package com.javarom.agendamento_api.business;
 import com.javarom.agendamento_api.business.mapper.IAgendamentoMapper;
 import com.javarom.agendamento_api.controller.dto.in.AgendamentoRecord;
 import com.javarom.agendamento_api.controller.dto.out.AgendamentoRecordOut;
+import com.javarom.agendamento_api.infrastructure.exception.NotFoundException;
 import com.javarom.agendamento_api.infrastructure.repositories.AgendamentoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,11 @@ public class AgendamentoService {
 
     public AgendamentoRecordOut gravarAgendamento(AgendamentoRecord agendamento){
        return agendamentoMapper.paraOut(repository.save(agendamentoMapper.paraEntity(agendamento)));
+    }
+
+    public AgendamentoRecordOut buscarAgendamentosPorId(Long id){
+        return agendamentoMapper.paraOut(repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Id não encontrador")));
     }
 
 
