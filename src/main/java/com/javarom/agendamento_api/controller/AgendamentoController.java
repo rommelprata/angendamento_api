@@ -25,4 +25,10 @@ public class AgendamentoController {
         return ResponseEntity.ok(agendamentoService.buscarAgendamentosPorId(id));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> cancelarAgendamento(@PathVariable("id") Long id){
+        agendamentoService.cancelarAgendamento(id);
+        return ResponseEntity.accepted().build();
+    }
+
 }
